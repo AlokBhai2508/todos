@@ -1,0 +1,56 @@
+.main {
+
+    background-color: #1B4965;
+    padding: 1.5vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+
+
+.title {
+
+    color: aliceblue;
+    font-size: 5vh;
+}
+
+
+a {
+    text-decoration: none;
+}
+
+.right {
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-around;
+    width: fit-content; */
+}
+
+.button {
+    padding: 2px;
+    margin-right: 5vh;
+    font-size: 4vh;
+    font-weight: 600;
+    color: #d4e6f3;
+
+
+
+}
+
+.button:hover {
+
+    background-color: #62B6CB;
+}
+
+@media (min-width:320px) {
+    .button {
+        padding: 2px;
+        margin-right: 5vh;
+        font-size: 4vh;
+    }
+}
+
+
+/* .button {} */
