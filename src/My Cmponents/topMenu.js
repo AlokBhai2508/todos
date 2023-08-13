@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import '../css/topMenu.css'
+import { Link } from "react-router-dom";
 
 export default function TopMenu() {
     const [menu, setMenu] = useState(true);
@@ -7,7 +8,7 @@ export default function TopMenu() {
     return (<>
         <div className={menu ? "main open" : "main"}>
             <div>
-                <a href='/'><h1 className='title'>Blog</h1></a>
+                <Link to='/'><h1 className='title'>Blog</h1></Link>
             </div>
 
             <div className='right'>
@@ -15,13 +16,13 @@ export default function TopMenu() {
                     onClick={() => { setMenu(!menu) }}
                 >O</button>
 
-                <a className='button' href='/'>
+                <Link className='button' to='/'>
                     Home
-                </a>
+                </Link>
 
-                <a className='button' href='/about'>
+                <Link className='button' to='/about'>
                     About
-                </a>
+                </Link>
 
 
 
