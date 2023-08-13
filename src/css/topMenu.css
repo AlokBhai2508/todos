@@ -2,9 +2,9 @@
 
     background-color: #1B4965;
     padding: 1.5vh;
+    height: auto;
     display: flex;
     justify-content: space-between;
-    align-items: center;
 
 }
 
@@ -24,8 +24,7 @@ a {
 .right {
     display: flex;
     flex-direction: row;
-    /* justify-content: space-around;
-    width: fit-content; */
+
 }
 
 .button {
@@ -38,19 +37,40 @@ a {
 
 
 }
-
+.side {
+    display: none;
+}
 .button:hover {
 
     background-color: #62B6CB;
 }
 
-@media (min-width:320px) {
-    .button {
-        padding: 2px;
-        margin-right: 5vh;
-        font-size: 4vh;
+@media screen and (max-width:768px) {
+    .main {
+        background-color: black;
     }
+
+    .right {
+        position: relative;
+    }
+
+    .right a {
+        display: none;
+    }
+
+    .side {
+        display: block;
+    }
+
+    .open .right a {
+        display: flex;
+    }
+
+    .open .right {
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
 }
 
 
-/* .button {} */
