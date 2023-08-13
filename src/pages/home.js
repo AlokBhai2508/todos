@@ -4,8 +4,7 @@ import TopMenu from '../My Cmponents/topMenu'
 export default function Home() {
     return (
         <div>
-            <TopMenu />
-            <h1>hhhhhooasdfmmmee</h1>
+            <h1>hhhhhoommmee</h1>
         </div>
     )
 }
