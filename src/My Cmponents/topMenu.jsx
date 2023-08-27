@@ -3,7 +3,7 @@ import '../css/topMenu.css'
 import { Link } from "react-router-dom";
 
 export default function TopMenu() {
-    const [menu, setMenu] = useState(true);
+    const [menu, setMenu] = useState(false);
 
     return (<>
         <div className={menu ? "main open" : "main"}>
