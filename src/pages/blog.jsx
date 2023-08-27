@@ -4,10 +4,10 @@ import { firestore } from '../firebase_setup/firebase'
 import { collection, doc, getDoc, getDocs } from 'firebase/firestore'
 
 export default function Blog() {
+
     const { blogSlug } = useParams();
     const [data, setData] = useState()
-
-    // console.log(firestore);
+    const [exist, setExist] = useState(true)
 
     const run = async () => {
         try {
@@ -18,7 +18,7 @@ export default function Blog() {
                 setData(dsnap.data())
 
             } else {
-                console.log(555)
+                setExist(false);
             }
 
         } catch (error) {
@@ -38,16 +38,20 @@ export default function Blog() {
     console.log(data)
     return (
         <div>
-            {data ?
-                <>
-
-
-
-                </>
+            {exist ? <>
+                {data ?
+                    <div>
+                        <h1>{data.title}</h1>
+                        <div dangerouslySetInnerHTML={{ __html: data.body }}></div>
+                    </div>
                 : <>
 
 
-                </>}
+                    </>}</> :
+                <div>
+                    <h1>Blog Not Found Error 404!</h1>
+                </div>}
+
         </div>
     )
 }
