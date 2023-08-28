@@ -5,6 +5,7 @@ import Home from "./pages/home";
 import About from "./pages/about";
 import Blog from "./pages/blog";
 import NotFound from "./pages/notfound";
+import Dashboard from "./admin/dashboard";
 function App() {
   return (
     <>
@@ -15,6 +16,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/blog/:blogSlug" element={<Blog />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/admin" element={<Dashboard />} />
         </Routes>
 
 
