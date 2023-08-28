@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import "./login.css";
 import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from '../firebase_setup/firebase';
+import NotLogged from './notLoged';
 
 
 
@@ -13,7 +14,7 @@ import { auth } from '../firebase_setup/firebase';
 
 export default function Dashboard() {
 
-    const [isLogged, setIsLoged] = useState(false)
+    const [isLogged, setIsLoged] = useState(null)
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -28,38 +29,6 @@ export default function Dashboard() {
     }, [])
 
 
-
-
-
-    function NotLogged() {
-        const [details, setDetails] = useState({ email: "", pass: "" });
-        const sub = () => {
-            console.log(details)
-            signInWithEmailAndPassword(auth, details.email, details.pass).then((user) => {
-                console.log(user)
-                setIsLoged(true);
-            }).catch((e) => {
-                console.log(e)
-            })
-        }
-        return (
-
-            <div id="loginform">
-                <h2 id="headerTitle">Login</h2>
-
-                <FormInput description="Username" placeholder="Enter your username" type="text" onChange={e => setDetails({ ...details, email: e.target.value })} />
-                <FormInput description="Password" placeholder="Enter your password" type="password" onChange={e => setDetails({ ...details, pass: e.target.value })} />
-                <div id="button" class="row">
-                    <button
-                        onClick={() => sub()}
-                    >Submit</button>
-                </div>
-
-            </div>
-
-        )
-
-    }
     function Logged() {
         return (
             <>
@@ -69,21 +38,16 @@ export default function Dashboard() {
             </>
         )
     }
-
+    console.log(!isLogged)
     return (
         <>
-            {isLogged ? <Logged /> : <NotLogged />}
+            {isLogged ? <Logged /> : (isLogged === null ? null : <NotLogged />)}
         </>
     )
 }
 
 
-const FormInput = props => (
-    <div class="row">
-        <label>{props.description}</label>
-        <input type={props.type} placeholder={props.placeholder} onChange={props.onChange} />
-    </div>
-);
+
 
 
 
