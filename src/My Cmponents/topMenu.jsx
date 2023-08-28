@@ -14,7 +14,10 @@ export default function TopMenu() {
             <div className='right'>
                 <button className='side'
                     onClick={() => { setMenu(!menu) }}
-                >O</button>
+                ><div className="bar"></div>
+                    <div className="bar"></div>
+                    <div className="bar"></div></button>
+
 
                 <Link className='button' to='/'>
                     Home

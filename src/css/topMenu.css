@@ -39,6 +39,8 @@ a {
 }
 .side {
     display: none;
+    background-color: #1b496500;
+        border: none;
 }
 .button:hover {
 
@@ -73,4 +75,12 @@ a {
 
 }
 
+.bar {
+
+    width: 35px;
+    height: 5px;
+    background-color: white;
+    margin: 6px 0;
+
+}
 
