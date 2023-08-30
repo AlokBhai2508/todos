@@ -6,6 +6,8 @@ import About from "./pages/about";
 import Blog from "./pages/blog";
 import NotFound from "./pages/notfound";
 import Dashboard from "./admin/dashboard";
+import Edit from "./admin/edit";
+import New from "./admin/new";
 function App() {
   return (
     <>
@@ -17,6 +19,8 @@ function App() {
           <Route path="/blog/:blogSlug" element={<Blog />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/admin" element={<Dashboard />} />
+          <Route path="/admin/new" element={<New />} />
+          <Route path="/edit/:blogSlug" element={<Edit />} />
         </Routes>
 
 

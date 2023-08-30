@@ -1,0 +1,58 @@
+.blog-cont-main {
+    background-color: whitesmoke;
+    margin-top: 20px;
+}
+
+.blog-cont {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.content {
+    width: 33.33%;
+    border-width: 2px;
+    border-color: black;
+    border-style: double;
+
+}
+
+.action {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.edit {
+    background-color: goldenrod;
+    color: white;
+    font-size: 20px;
+    padding: 5px;
+}
+
+.delete {
+    background-color: brown;
+    color: white;
+    font-size: 20px;
+    padding: 5px;
+}
+
+#add {
+    background-color: green;
+    color: white;
+    font-size: 20px;
+    padding: 5px;
+    margin: 20px;
+}
+
+#out {
+    background-color: red;
+    color: white;
+    font-size: 20px;
+    padding: 5px;
+    margin: 20px;
+}
+
+.header {
+    font-weight: bold;
+    background-color: aquamarine;
+}
