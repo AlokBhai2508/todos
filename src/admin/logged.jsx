@@ -74,7 +74,7 @@ export default function Logged() {
                                 <h4 className='content'>{blog.slug}</h4>
                                 <div className="content action">
                                     <Link className='edit'
-                                        to={"/edit/" + blog.slug}
+                                        to={"/edit/blog/" + blog.slug}
                                     >Edit</Link>
                                     <button className='delete'
                                         onClick={() => del(blog.id, 'blog')}
@@ -107,7 +107,7 @@ export default function Logged() {
                                 <h4 className='content'>{draft.slug}</h4>
                                 <div className="content action">
                                     <Link className='edit'
-                                        to={"/edit/" + draft.slug}
+                                        to={"/edit/drafts/" + draft.slug}
                                     >Edit</Link>
                                     <button className='delete'
                                         onClick={() => del(draft.id, 'drafts')}

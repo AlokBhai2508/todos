@@ -18,7 +18,7 @@ const NewModal = ({ open, close }) => {
                 ...details
             })
         }).then(
-            navigate("/edit/" + details.slug)
+            navigate("/edit/drafts/" + details.slug)
         )
 
 

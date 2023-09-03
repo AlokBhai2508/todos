@@ -20,7 +20,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
           <Route path="/admin" element={<Dashboard />} />
 
-          <Route path="/edit/:blogSlug" element={<Edit />} />
+          <Route path="/edit/:type/:blogSlug" element={<Edit />} />
         </Routes>
 
 

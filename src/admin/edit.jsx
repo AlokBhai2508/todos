@@ -1,24 +1,40 @@
 import React, { useEffect, useState } from 'react'
 import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
-import { auth } from '../firebase_setup/firebase';
-import { useNavigate } from 'react-router-dom';
+import { auth, firestore } from '../firebase_setup/firebase';
+import { useNavigate, useParams } from 'react-router-dom';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 
 export default function Edit() {
     const navigate = useNavigate();
     const [isLogged, setIsLoged] = useState(null)
+    const [blog, setBlog] = useState();
+    const { blogSlug, type } = useParams()
+    const handleSave = () => {
+        console.log(blog)
+        setDoc(doc(firestore, type, blogSlug), blog)
+    }
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 setIsLoged(true)
             } else {
-                // User is signed out
-                // ...
+
                 setIsLoged(false)
             }
         });
 
     }, [])
+
+    useEffect(() => {
+        console.log(blogSlug, type)
+        getDoc(doc(firestore, type, blogSlug)).then((val) => {
+            setBlog(val.data());
+        })
+
+    }, [])
+
+
     if (isLogged != null) {
         if (!isLogged) {
             navigate("/admin")
@@ -27,6 +43,15 @@ export default function Edit() {
     }
     return (
         <div>
+            {/* {console.log(blog)} */}
+            {blog ? <>
+                <input type="text" value={blog.title} onChange={(e) => setBlog({ ...blog, title: e.target.value })} />
+                <button
+                    onClick={() => handleSave()}
+                >
+                    Save
+                </button>
+            </> : null}
 
         </div>
     )
