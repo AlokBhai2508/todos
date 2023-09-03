@@ -1,17 +1,28 @@
 import React, { useEffect, useState } from 'react'
 import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth, firestore } from '../firebase_setup/firebase';
-import { collection, deleteDoc, doc, getDocs } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getDoc, setDoc, getDocs } from 'firebase/firestore';
 import "./dashboard.css";
 import { Link, useNavigate } from 'react-router-dom';
 import NewModal from '../My Cmponents/newModal';
 
 export default function Logged() {
     const navigate = useNavigate();
-    const del = (id) => {
-        let ref = doc(firestore, 'blog', id)
+    const del = (id, pos) => {
+        let ref = doc(firestore, pos, id)
         deleteDoc(ref)
         setChanges(changes + 1)
+    }
+    const handlePublish = (id) => {
+        getDoc(doc(firestore, "drafts", id)).then((val) => {
+            setDoc(doc(firestore, "blog", id), {
+                ...val.data(),
+            })
+        }).then(() => {
+            deleteDoc(doc(firestore, "drafts", id)).then(() => {
+                setChanges(changes + 1)
+            })
+        })
     }
     const newBlog = () => {
         navigate("/admin/new")
@@ -66,7 +77,7 @@ export default function Logged() {
                                         to={"/edit/" + blog.slug}
                                     >Edit</Link>
                                     <button className='delete'
-                                        onClick={() => del(blog.id)}
+                                        onClick={() => del(blog.id, 'blog')}
                                     >Delete</button>
                                 </div>
 
@@ -99,10 +110,10 @@ export default function Logged() {
                                         to={"/edit/" + draft.slug}
                                     >Edit</Link>
                                     <button className='delete'
-                                        onClick={() => del(draft.id)}
+                                        onClick={() => del(draft.id, 'drafts')}
                                     >Delete</button>
                                     <button className='publish'
-                                        onClick={null}
+                                        onClick={() => handlePublish(draft.id)}
                                     >Publish</button>
                                 </div>
 
