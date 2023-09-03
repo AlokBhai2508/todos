@@ -4,6 +4,7 @@ import { auth, firestore } from '../firebase_setup/firebase';
 import { collection, deleteDoc, doc, getDocs } from 'firebase/firestore';
 import "./dashboard.css";
 import { Link, useNavigate } from 'react-router-dom';
+import NewModal from '../My Cmponents/newModal';
 
 export default function Logged() {
     const navigate = useNavigate();
@@ -16,7 +17,9 @@ export default function Logged() {
         navigate("/admin/new")
     }
     const [blogs, setBlogs] = useState();
+    const [drafts, setDrafts] = useState();
     const [changes, setChanges] = useState(0);
+    const [oModal, setOModal] = useState(false);
     useEffect(() => {
         const ref = getDocs(collection(firestore, "blog")).then((e) => {
             const newData = e.docs
@@ -25,16 +28,28 @@ export default function Logged() {
 
         });
     }, [changes])
+    useEffect(() => {
+        console.log(12)
+        const ref = getDocs(collection(firestore, "drafts")).then((e) => {
+            const newData = e.docs
+                .map((doc) => ({ ...doc.data(), id: doc.id }));
+            setDrafts(newData);
+
+        });
+    }, [changes])
 
     return (
+
         <div>
-            {console.log(blogs)}
+
+            <div id="blog-dash">
             <div className="main-container">
                 <h1>Blogs</h1>
                 <button
                     id='add'
-                    onClick={() => newBlog()}
+                        onClick={() => setOModal(true)}
                 >Add New</button>
+                    <NewModal open={oModal} close={() => { setOModal(false) }} />
                 <div className="blog-cont-main">
                     <div className="blog-cont">
                         <h3 className="content header">Title</h3>
@@ -42,23 +57,59 @@ export default function Logged() {
                         <h3 className="content header">Action</h3>
                     </div>
 
-                    {blogs ? blogs.map(blog => (
-                        <div className='blog-cont'>
-                            <h4 className='content'>{blog.title}</h4>
-                            <h4 className='content'>{blog.slug}</h4>
-                            <div className="content action">
-                                <Link className='edit'
-                                    to={"/edit/" + blog.slug}
-                                >Edit</Link>
-                                <button className='delete'
-                                    onClick={() => del(blog.id)}
-                                >Delete</button>
+                        {blogs ? blogs.map(blog => (
+                            <div className='blog-cont'>
+                                <h4 className='content'>{blog.title}</h4>
+                                <h4 className='content'>{blog.slug}</h4>
+                                <div className="content action">
+                                    <Link className='edit'
+                                        to={"/edit/" + blog.slug}
+                                    >Edit</Link>
+                                    <button className='delete'
+                                        onClick={() => del(blog.id)}
+                                    >Delete</button>
+                                </div>
+
                             </div>
+                        ))
+                            : null}
 
+
+                    </div>
+                </div>
+
+
+
+
+                <div id="draft">
+                    <h1>Drafts</h1>
+                    <div className="blog-cont-main">
+                        <div className="blog-cont">
+                            <h3 className="content header">Title</h3>
+                            <h3 className="content header">Slug</h3>
+                            <h3 className="content header">Action</h3>
                         </div>
-                    ))
-                        : null}
 
+                        {drafts ? drafts.map(draft => (
+                            <div className='blog-cont'>
+                                <h4 className='content'>{draft.title}</h4>
+                                <h4 className='content'>{draft.slug}</h4>
+                                <div className="content action">
+                                    <Link className='edit'
+                                        to={"/edit/" + draft.slug}
+                                    >Edit</Link>
+                                    <button className='delete'
+                                        onClick={() => del(draft.id)}
+                                    >Delete</button>
+                                    <button className='publish'
+                                        onClick={null}
+                                    >Publish</button>
+                                </div>
+
+                            </div>
+                        ))
+                            : null}
+                    </div>
                 </div>
             </div>
 

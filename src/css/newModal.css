@@ -1,0 +1,33 @@
+.modal-main {
+    background-color: rgba(56, 56, 56, 0.315);
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box {
+    background-color: whitesmoke;
+    border-radius: 5px;
+    width: 30rem;
+    height: 20rem;
+    padding: 1rem;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal-content {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    flex-direction: column;
+}
