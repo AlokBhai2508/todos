@@ -1,0 +1,31 @@
+.inn {
+    background-color: whitesmoke;
+    height: 20000%;
+    width: 100%;
+    flex: 1;
+
+}
+
+.tag {
+    display: flex;
+    flex-wrap: wrap;
+    overflow: auto;
+    margin-top: 5px;
+    background-color: gainsboro;
+    padding: 3px;
+    margin: 2px;
+    border-radius: 7px;
+}
+
+.tag-div {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.cancel {
+    margin-left: 3px;
+    border-radius: 360px;
+    border-style: none;
+    background-color: rgba(0, 0, 0, 0);
+}

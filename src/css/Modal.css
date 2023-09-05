@@ -31,3 +31,7 @@
     height: 100%;
     flex-direction: column;
 }
+
+.modal-content-corner {
+    align-items: flex-start;
+}
