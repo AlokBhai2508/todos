@@ -1,51 +1,40 @@
 import React, { useEffect, useState } from 'react'
 import "../css/editSetModal.css"
+import TagInput from './tagInput';
+import { addDoc, doc, getDoc, setDoc } from 'firebase/firestore';
+import { firestore } from '../firebase_setup/firebase';
 
-export default function EditSetModal({ open, close, det }) {
-    const [arr, setArr] = useState([]);
-    const [inp, setInput] = useState('');
-    const [change, setChange] = useState(0);
-    const handleSave = () => {
-
-    }
-    useEffect(() => {
-        setArr(det.tags)
-    }, [])
+export default function EditSetModal({ open, close, det, type }) {
+    const [update, setUpdate] = useState({})
     if (!open) return null;
+    const handleSubmit = () => {
+        getDoc(doc(firestore, type, det.slug)).then((e) => {
+            let val = e.data()
+            setDoc(doc(firestore, type, det.slug), {
+                ...val,
+                ...update
+            })
+        })
+    }
+    // console.log(det)
     return (
         <div className="modal-main">
             <div className="box">
                 <div className="top">
                     <h1>Settings</h1>
                     <button
+                        onClick={() => handleSubmit()}
+                    >Save</button>
+                    <button
                         onClick={close}
                     ><h1>X</h1></button>
 
                 </div>
-                <div className="modal-content-corner">
-                    <div>
-                        <div className="tag-div">
-                            {arr.map((e, i) => <span className='tag'>{e}
-                                <button className='cancel'
-                                    onClick={() => {
-                                        let a = arr.splice(i, 1)
-                                        console.log(arr)
-                                        setChange(change + 1)
-                                        // setArr()
-
-                                    }}
-                                >x</button>
-                            </span>)}
-                        </div>
-
-                        <input className="inn" type="text" onChange={(e) => setInput(e.target.value)} value={inp} onKeyUp={(key) => {
-                            if ((key.code === "NumpadEnter" || key.code === "Enter") && inp !== "") {
-                                setArr([...arr, inp]);
-                                setInput('')
-                            }
-                        }} />
-                    </div>
+                {det ? <>
+                    <div className="modal-content-corner">
+                        <TagInput tag={det.tags} onChange={(arr) => setUpdate({ ...update, tags: arr })} />
                 </div>
+                </> : null}
             </div>
         </div>
     )

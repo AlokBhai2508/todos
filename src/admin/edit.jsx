@@ -9,7 +9,7 @@ import EditSetModal from '../My Cmponents/editSetModal';
 export default function Edit() {
     const navigate = useNavigate();
     const [isLogged, setIsLoged] = useState(null)
-    const [blog, setBlog] = useState({});
+    const [blog, setBlog] = useState();
     const [modalSet, setModalSet] = useState(false);
     const { blogSlug, type } = useParams()
     const handleSave = () => {
@@ -59,7 +59,7 @@ export default function Edit() {
                     >
                         Settings
                     </button>
-                    <EditSetModal open={modalSet} close={() => setModalSet(false)} det={blog} />
+                    <EditSetModal open={modalSet} close={() => setModalSet(false)} det={blog} type={type} />
 
                 </div>
 

@@ -3,6 +3,8 @@
     height: 20000%;
     width: 100%;
     flex: 1;
+    border-radius: 15px;
+        padding: 4px;
 
 }
 
