@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { redirect, useParams } from 'react-router-dom'
 import { firestore } from '../firebase_setup/firebase'
-import { collection, doc, getDoc, getDocs } from 'firebase/firestore'
+import { collection, doc, getDoc, } from 'firebase/firestore'
 
 export default function Blog() {
 
@@ -28,7 +28,7 @@ export default function Blog() {
 
     }
     useEffect(() => {
-        const ref = collection(firestore, 'blog')
+
         try {
             run();
         } catch (error) {
@@ -40,9 +40,9 @@ export default function Blog() {
         <div>
             {exist ? <>
                 {data ?
-                    <div>
+                    <div style={{ marginLeft: "50px", marginRight: "50px", wordWrap: "break-word" }}>
                         <h1>{data.title}</h1>
-                        <div dangerouslySetInnerHTML={{ __html: data.body }}></div>
+                        <div dangerouslySetInnerHTML={{ __html: data.body }} style={{ marginTop: 10 }}></div>
                     </div>
                 : <>
 

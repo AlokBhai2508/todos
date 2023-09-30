@@ -26,6 +26,9 @@ export default function TopMenu() {
                 <Link className='button' to='/about'>
                     About
                 </Link>
+                <Link className='button' to='/blogs'>
+                    Blogs
+                </Link>
 
 
 
